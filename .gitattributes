@@ -1,0 +1,22 @@
+# Mengatur normalisasi end-of-line untuk semua file teks
+* text=auto
+
+# Menentukan file tertentu sebagai binary (Git tidak akan mencoba untuk mengonversi EOL)
+*.png binary
+*.jpg binary
+*.gif binary
+
+# Menangani file JSON sebagai teks dengan line endings diubah menjadi LF
+*.json text eol=lf
+
+# Mengatur file shell script sebagai executable (jika di Unix)
+*.sh text eol=lf
+
+# Menangani file Markdown sebagai teks
+*.md text eol=lf
+
+# Mengatur file Windows batch sebagai teks dengan CRLF line endings
+*.bat text eol=crlf
+
+# Mengatur file .lintstagedrc.json untuk menggunakan CRLF
+src/.lintstagedrc.json text eol=crlf
