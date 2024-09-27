@@ -1,0 +1,80 @@
+// name file modules diganti module
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+
+  &__error {
+    color: red;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  &__form {
+    width: 30%;
+    padding: 20px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 05);
+    margin-bottom: 20px;
+    &__item {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0;
+      &__input {
+        padding: 10px;
+        background-color: #f5f5f5; /* Ganti warna sesuai kebutuhan */
+        margin-top: 5px;
+        border: 1px solid #ccc; /* Tambahkan border agar lebih terlihat */
+        outline: none;
+        border-radius: 4px; /* Tambahkan border-radius untuk tampilan lebih baik */
+        transition: border-color 0.3s ease; /* Animasi untuk transisi */
+
+        &:focus {
+          border-color: #007bff; /* Warna border saat fokus */
+          background-color: #fff; /* Ubah background saat fokus untuk kontras */
+        }
+      }
+    }
+    &__button {
+      background-color: #000; /* Warna latar belakang hitam */
+      color: #fff; /* Warna teks putih */
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px; /* Memberikan sudut yang sedikit bulat */
+      cursor: pointer; /* Menambahkan kursor pointer untuk interaksi */
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Transisi untuk efek hover */
+
+      &:hover {
+        background-color: #333; /* Warna saat hover lebih terang sedikit */
+        transform: scale(1.05); /* Efek sedikit membesar saat hover */
+      }
+
+      &:focus {
+        outline: none; /* Menghilangkan outline default */
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2); /* Tambah shadow fokus */
+      }
+
+      &:disabled {
+        background-color: #555; /* Warna jika tombol dalam keadaan disable */
+        cursor: not-allowed; /* Menandakan tombol tidak bisa diklik */
+      }
+    }
+  }
+
+  &__link {
+    color: #000;
+    text-decoration: none;
+    margin-top: 20px;
+
+    a {
+      color: #23bede;
+    }
+  }
+}
