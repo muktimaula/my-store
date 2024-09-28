@@ -76,7 +76,7 @@ const RegisterView = () => {
             <input
               name="password"
               id="password"
-              type="passwor"
+              type="password"
               className={styles.register__form__item__input}
             />
           </div>
