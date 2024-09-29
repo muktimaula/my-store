@@ -3,6 +3,9 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signIn } from "@/lib/firebase/servise";
 import { compare } from "bcrypt";
+import GoogleProvaider from "next-auth/providers/google";
+import Email from "next-auth/providers/email";
+import { loginWithGoogle } from "@/lib/firebase/servise";
 
 const authOptions: NextAuthOptions = {
   session: {
@@ -24,6 +27,7 @@ const authOptions: NextAuthOptions = {
         };
         const user: any = await signIn(email);
         if (user) {
+          //untuk mengecek apakah email sudah terdaftar menggunakana bycrypt
           const passwoardConfirm = await compare(password, user.password);
           if (passwoardConfirm) {
             return user;
@@ -33,6 +37,11 @@ const authOptions: NextAuthOptions = {
           return null;
         }
       },
+    }),
+    // 3. credentials google
+    GoogleProvaider({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
     }),
   ], //setelah credentials ditambahkan lanjut membuat authorize
 
@@ -44,6 +53,21 @@ const authOptions: NextAuthOptions = {
         token.phone = user.phone;
         token.role = user.role;
       }
+      // 3.CEK GOOGLE
+      if (account?.provider === "google") {
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          type: "google",
+        }; //lanjut fungsi with google di firebase/servise.ts
+        // 3. mambuat login
+        await loginWithGoogle(data, (data: any) => {
+          token.email = data.email;
+          token.fullname = data.fullname;
+          token.role = data.role;
+        }); //lanjut buat button di view/auth/login/index.tsx
+      }
+
       return token;
     },
 
@@ -64,6 +88,7 @@ const authOptions: NextAuthOptions = {
     },
   },
   pages: {
+    //custom login diserver
     signIn: "/auth/login",
   },
 };

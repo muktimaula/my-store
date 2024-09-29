@@ -100,3 +100,28 @@ export async function signIn(email: string) {
   }
   //lanjut membuat api (firebase) [...nextauth].ts di api/auth
 }
+
+//.3 lanjut membuat api (firebase) [...nextauth].ts di api/auth
+export async function loginWithGoogle(data: any, callback: Function) {
+  //untuk mengecek apakah email sudah terdaftar
+  const q = query(
+    collection(firestore, "users"),
+    where("email", "==", data.email) //user yang sudah terdaftar tidak boleh registrasi
+  );
+
+  const snapshot = await getDocs(q);
+  const user = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (user.length > 0) {
+    callback(user[0]);
+  } else {
+    data.role = "member";
+    await addDoc(collection(firestore, "users"), data).then(() => {
+      callback(data);
+    });
+  }
+  //lanjut membuat api (firebase) [...nextauth].ts di api/auth
+}

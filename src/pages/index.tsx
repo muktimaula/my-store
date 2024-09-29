@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data } = useSession();
-  console.log(data);
+  // console.log(data); //nyalian aja buat liat hasil data yng di input
   return (
     <>
       <Head>

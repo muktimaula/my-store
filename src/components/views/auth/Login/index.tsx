@@ -53,6 +53,7 @@ const LoginView = () => {
               name="email"
               id="email"
               type="email"
+              autoComplete="email" // Tambahkan ini untuk
               className={styles.login__form__item__input}
             />
           </div>
@@ -62,6 +63,7 @@ const LoginView = () => {
               name="password"
               id="password"
               type="password"
+              autoComplete="current-password" // Tambahkan ini
               className={styles.login__form__item__input}
             />
           </div>
@@ -69,10 +71,21 @@ const LoginView = () => {
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+        <hr className={styles.login__form__devider} />
+        <div className={styles.login__form__other}>
+          <button
+            type="button"
+            onClick={() => signIn("google", { callbackUrl, redirect: false })}
+            className={styles.login__form__other__button}
+          >
+            <i className="bx bxl-google" /> Login With Google
+          </button>
+        </div>
       </div>
+
       <p className={styles.login__link}>
         Don{"'"}t Have an account? Sign up
-        <Link href="/auth/register">here</Link>
+        <Link href="/auth/register"> here</Link>
       </p>
     </div>
   );
